@@ -11,3 +11,6 @@ Permettant de savoir :
     - la lattitude,
     - la longitude 
 d'une ville passé en parametre
+
+******************************************
+Lancement de l'aps : node app.js -a "nomVille"
