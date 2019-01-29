@@ -1,0 +1,5 @@
+GOOGLE_API_KEY: AIzaSyAEq9AbpiYhXxVLy84_WZKzGfoKWaYPY8M
+DARKSKY_API_KEY: d4b8c0d79d3caaf64908cd0e8acc0ca8
+
+https://maps.googleapis.com/maps/api/geocode/json?address=ADDRESS&key=GOOGLE_API_KEY
+https://api.darksky.net/forecast/DARKSKY_API_KEY/LNG,LAT
