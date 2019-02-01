@@ -125,7 +125,7 @@ app.post('/users/login', (req, res) => {
       }) // on utilise le catch du bas
     })
     .catch(err=> {
-      res.status(400).send();
+      res.status(400).send(err);
     })
 });
 
