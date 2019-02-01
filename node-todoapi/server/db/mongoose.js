@@ -7,6 +7,12 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/TodoApp',
   {useNewUrlParser: true });
 
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+
+//cryptage du password
+mongoose
+
 // Exportation de mongoose
-module.exports ={ mongoose };
+module.exports = { mongoose };
 

@@ -6,12 +6,17 @@ const {ObjectID} = require('mongodb');
 // {} Permet exporte la valeur de l'obj mongoose
 const { mongoose } = require('./db/mongoose');
 const {Todo} = require('./models/todo');
+const {User} = require('./models/user');
+const {authenticate} = require('./../server/mildleware/authenticate');
 var app = express();
 
 // Middleware décodant le json inclus dans le body des requetes
 app.use(bodyParser.json());
 
-// Routes //https://httpstatuses.com/ Elles se testent sur POSTMAN
+
+
+// ** Routes TODO ** \\
+//https://httpstatuses.com/ Elles se testent sur POSTMAN
 // POST /todos
 app.post('/todos', (req, res) => {
   var todo = new Todo ({
@@ -95,7 +100,41 @@ app.patch('/todos/:id', (req, res) => {
     }).catch(err => res.status(400).send())
   });
 
-////////////////////////////////////////////////////////////////
+// ** Routes User ** \\
+// POST /users
+app.post('/users', (req, res)=> {
+  var body = _.pick(req.body, ['email', 'password']); // .pick permet d'extraire des données
+  var user = new User(body);
+
+  user.save().then(doc => {
+    res.status(200).send(doc);
+  }).catch(err => {
+    res.status(400).send(err);
+  })
+});
+
+// POST /users/login
+app.post('/users/login', (req, res) => {
+  var body = _.pick(req.body, ['email', 'password']);
+
+  User.findByCredentials(body.email, body.password)
+    .then(user => {
+      //res.status(200).send(user);
+      user.generateAuthToken().then(token => {
+        res.header('x-auth', token).send(user); //x- entete personalisé
+      }) // on utilise le catch du bas
+    })
+    .catch(err=> {
+      res.status(400).send();
+    })
+});
+
+// GET /users/me
+app.get('/users/me', authenticate, (req, res) => {
+  res.send(req.user)
+});
+
+//////////////////////////// - \\\\\\\\\\\\\\\\\\\\\\
 app.listen(3000, () => {
   console.log('Serveur connecté - Port 3000');
 });

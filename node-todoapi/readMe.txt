@@ -5,13 +5,20 @@ Télécharger : npm i --save express body-parser lodash dev mocha expect superte
     express Gestion des routes
     body-parser Décode les donnees du corps de le requete
     lodash 
-    dev 
+    
+    npm i --save-dev 
     mocha 
     expect 
     supertest 
     nodemon Garde le serveur en continu
     >> Genere le package-lock.json
 
+    * Penser à rajouter :
+        "test-watch": "nodemon --exec npm run test"
+        dans le script du package.json
+
+    npm i --save validator bcryptjs jsonwebtoken
+    >> Gestion token
 ******************************************
 Application NodeJs
 
